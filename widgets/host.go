@@ -3,6 +3,7 @@ package widgets
 import (
 	termuiw "github.com/gizak/termui/v3/widgets"
 	"github.com/shirou/gopsutil/v3/host"
+	"gonitor/util"
 	"log"
 	"os"
 )
@@ -13,6 +14,7 @@ type HostWidget struct {
 
 func (w *HostWidget) init() {
 	w.Title = "Host"
+	w.TitleStyle = util.ClearBold
 	users, err := host.Users()
 	if err != nil {
 		log.Fatal(err)
@@ -26,7 +28,7 @@ func (w *HostWidget) update() {
 }
 
 func NewHostWidget() *HostWidget {
-	self := HostWidget{Paragraph: termuiw.NewParagraph()}
-	self.init()
-	return &self
+	widget := HostWidget{Paragraph: termuiw.NewParagraph()}
+	widget.init()
+	return &widget
 }

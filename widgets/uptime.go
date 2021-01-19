@@ -15,6 +15,7 @@ type UptimeWidget struct {
 
 func (w *UptimeWidget) init() {
 	w.Title = "Uptime"
+	w.TitleStyle = util.ClearBold
 	w.update()
 
 	if w.interval > 0 {
@@ -35,10 +36,10 @@ func (w *UptimeWidget) update() {
 }
 
 func NewUptimeWidget(interval time.Duration) *UptimeWidget {
-	self := UptimeWidget{
+	widget := UptimeWidget{
 		Paragraph: termuiw.NewParagraph(),
-		interval: interval,
+		interval:  interval,
 	}
-	self.init()
-	return &self
+	widget.init()
+	return &widget
 }
