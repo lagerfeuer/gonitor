@@ -99,6 +99,8 @@ func (w *ProcessListWidget) update() {
 
 	w.processInfos = FetchProcessInfos()
 	var rows []string
+	rows = append(rows, fmt.Sprintf("%-8s %-*s %6s %6s  ",
+		"PID", nameWidth, "Name", "CPU", "MEM"))
 	for _, proc := range w.processInfos {
 		rows = append(rows, fmt.Sprintf(
 			"%8d %-*s %5.1f%% %5.1f%%  ",
