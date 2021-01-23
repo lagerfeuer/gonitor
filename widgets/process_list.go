@@ -41,14 +41,14 @@ func (l ProcessList) Len() int {
 func (l ProcessList) Less(i, j int) bool {
 	switch sortMethod {
 	case PIDSort:
-		return l[i].Process.Pid > l[j].Process.Pid
+		return l[i].Process.Pid < l[j].Process.Pid
 	case MemSort:
-		return l[i].MemoryUsed > l[j].MemoryUsed
+		return l[i].MemoryUsed < l[j].MemoryUsed
 	case CPUSort:
-		return l[i].CPUUsed > l[j].CPUUsed
+		return l[i].CPUUsed < l[j].CPUUsed
 	}
 	// Unreachable
-	return l[i].CPUUsed > l[j].CPUUsed
+	return l[i].CPUUsed < l[j].CPUUsed
 }
 
 func (l ProcessList) Swap(i, j int) {
@@ -89,7 +89,7 @@ func FetchProcessInfos() []ProcessInfo {
 		}
 		processInfos = append(processInfos, ProcessInfo{proc, name, cpu, mem})
 	}
-	sort.Sort(ProcessList(processInfos))
+	sort.Sort(sort.Reverse(ProcessList(processInfos)))
 	return processInfos
 }
 
